@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Adverbs of Frequency Practice</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f1f6ff;color:#203047;line-height:1.5}header{background:#17365d;color:white;text-align:center;padding:20px 12px}main{max-width:850px;margin:18px auto;padding:0 12px 30px}.card{background:white;border-radius:16px;padding:18px;margin-bottom:16px;box-shadow:0 5px 18px #17365d16}h1{font-size:clamp(23px,5vw,32px);margin:0}h2{margin:0 0 14px;color:#17365d}.rule{padding:13px;background:#eef5ff;border-left:5px solid #2767c8;border-radius:8px;margin-bottom:15px}.buttons,.tabs{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}.btn,.tab{border:0;border-radius:10px;padding:11px 16px;font-size:16px;font-weight:bold;cursor:pointer;background:#2767c8;color:white}.tab{flex:1;background:#dce8f9;color:#17365d}.tab.active{background:#2767c8;color:white}.hidden{display:none!important}.meta{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;font-weight:bold}.pill{background:#edf4ff;padding:6px 10px;border-radius:20px}.progress{height:8px;background:#e4eaf3;border-radius:8px;margin:12px 0}.bar{height:100%;background:#29a36a;width:0;border-radius:8px}.question{font-size:19px;font-weight:bold;margin:18px 0}.opt{display:block;width:100%;text-align:left;padding:12px;margin:8px 0;border:2px solid #d9e2f0;border-radius:10px;background:white;font-size:16px;cursor:pointer}.opt.correct{background:#e7fff0;border-color:#198754}.opt.wrong{background:#fff0f0;border-color:#c92a3a}.opt:disabled{cursor:default}.feedback{display:none;padding:13px;border-radius:10px;margin-top:14px}.feedback.show{display:block}.feedback.good{background:#e8fff1;color:#155f3a}.feedback.bad{background:#fff0f1;color:#922331}.feedback strong{display:block;margin-bottom:5px}.entry{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:10px 0}.entry label{font-weight:bold}.entry input{width:145px;max-width:45%;padding:11px;border:2px solid #d9e2f0;border-radius:9px;font-size:16px}.sentence{background:#fff8df;padding:12px;border-radius:10px;margin:10px 0}.muted{color:#586a80}.footer{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:15px}@media(max-width:520px){.card{padding:13px}.entry input{width:120px}.btn,.tab{font-size:14px;padding:10px}}
+</style></head>
+<body>
+<header><h1>Adverbs of Frequency</h1><p>Interactive Grammar Practice</p></header>
+<main>
+<section class="card" id="intro">
+<h2>Vị trí trạng từ</h2>
+<div class="rule"><b>Trạng từ đứng trước động từ thường, sau to be (am, is, are).</b></div>
+<div class="tabs"><button class="tab active" id="tab1" onclick="start(1)">Exercise 1: Choose A or B</button><button class="tab" id="tab2" onclick="start(2)">Exercise 2: Complete the sentence</button></div>
+<p class="muted">Choose an exercise to begin.</p>
+</section>
+<section class="card hidden" id="quiz">
+<div class="meta"><span class="pill" id="qnum"></span><span class="pill" id="score"></span></div><div class="progress"><div class="bar" id="bar"></div></div>
+<div class="question" id="question"></div><div id="answerArea"></div><div id="feedback" class="feedback" aria-live="polite"></div>
+<div class="footer"><button class="btn" id="next" disabled onclick="next()">Next question →</button><button class="btn" style="background:#6b7c93" onclick="home()">Back</button></div>
+</section>
+<section class="card hidden" id="finish"><h2 id="finishTitle">Exercise complete</h2><p id="finalScore"></p><div class="footer"><button class="btn" onclick="home()">Back to exercises</button><button class="btn" onclick="start(which)">Try again</button></div></section>
+</main>
+<script>
+const exercises={
+1:{title:"Exercise 1: Choose A or B",items:[
+{q:"I □□□□ late on Saturdays.",opts:["get up usually","usually get up"],a:1,ex:"“Usually” đứng trước động từ thường “get up”. Câu đúng: I usually get up late on Saturdays."},
+{q:"My mum □□□□ to work late.",opts:["rarely goes","goes rarely"],a:0,ex:"“Rarely” đứng trước động từ thường “goes”. Câu đúng: My mum rarely goes to work late."},
+{q:"□□□□ at weekends?",opts:["Do you often travel","Often do you travel"],a:0,ex:"Trong câu hỏi có “do”, trạng từ đứng sau chủ ngữ và trước động từ thường. Câu đúng: Do you often travel at weekends?"},
+{q:"What kind of music □□□□?",opts:["usually does Susan listen to","does Susan usually listen to"],a:1,ex:"Trong câu hỏi này, “usually” đứng sau chủ ngữ “Susan” và trước động từ “listen”. Câu đúng: What kind of music does Susan usually listen to?"},
+{q:"When □□□□ go on holiday each year?",opts:["do you usually","usually do you"],a:0,ex:"Trong câu hỏi, sau từ để hỏi là “do + chủ ngữ + trạng từ + động từ”. Câu đúng: When do you usually go on holiday each year?"}
+]},
+2:{title:"Exercise 2: Complete the sentence",items:[
+{q:"I remember to do my homework. (always)",verb:"remember",adverb:"always",before:"I",after:"to do my homework.",full:"I always remember to do my homework.",ex:"“Always” đứng trước động từ thường “remember”. Câu đúng: I always remember to do my homework."},
+{q:"Nick gets good marks in exams. (usually)",verb:"gets",adverb:"usually",before:"Nick",after:"good marks in exams.",full:"Nick usually gets good marks in exams.",ex:"“Usually” đứng trước động từ thường “gets”. Câu đúng: Nick usually gets good marks in exams."},
+{q:"We do not see a rabbit in town. (often)",verb:"see",adverb:"often",before:"We do not",after:"a rabbit in town.",full:"We do not often see a rabbit in town.",ex:"Trong câu phủ định, “often” đứng sau “do not” và trước động từ thường “see”. Câu đúng: We do not often see a rabbit in town."},
+{q:"I read in bed at night. (rarely)",verb:"read",adverb:"rarely",before:"I",after:"in bed at night.",full:"I rarely read in bed at night.",ex:"“Rarely” đứng trước động từ thường “read”. Câu đúng: I rarely read in bed at night."},
+{q:"Do you sing in the shower? (sometimes)",verb:"sing",adverb:"sometimes",before:"Do you",after:"in the shower?",full:"Do you sometimes sing in the shower?",ex:"Trong câu hỏi có “do”, “sometimes” đứng sau chủ ngữ “you” và trước động từ thường “sing”. Câu đúng: Do you sometimes sing in the shower?"}
+]}
+};
+let which=1,idx=0,points=0,locked=false;
+function start(n){which=n;idx=0;points=0;document.getElementById('intro').classList.add('hidden');document.getElementById('finish').classList.add('hidden');document.getElementById('quiz').classList.remove('hidden');document.getElementById('tab1').classList.toggle('active',n===1);document.getElementById('tab2').classList.toggle('active',n===2);render()}
+function render(){const data=exercises[which].items;if(idx>=data.length){document.getElementById('quiz').classList.add('hidden');document.getElementById('finish').classList.remove('hidden');document.getElementById('finishTitle').textContent=exercises[which].title+' — Complete';document.getElementById('finalScore').textContent=`Your score: ${points} / ${data.length}`;return}
+locked=false;const it=data[idx];document.getElementById('qnum').textContent=`Question ${idx+1} / ${data.length}`;document.getElementById('score').textContent=`Score: ${points} / ${data.length}`;document.getElementById('bar').style.width=`${idx/data.length*100}%`;document.getElementById('question').textContent=it.q;document.getElementById('feedback').className='feedback';document.getElementById('feedback').innerHTML='';document.getElementById('next').disabled=true;const area=document.getElementById('answerArea');area.innerHTML='';
+if(which===1){it.opts.forEach((opt,i)=>{let b=document.createElement('button');b.className='opt';b.textContent=String.fromCharCode(65+i)+'. '+opt;b.onclick=()=>markChoice(i);area.appendChild(b)})}
+else{area.innerHTML=`<div class="sentence">${it.before} <span class="entry" style="display:inline-flex"><input id="adv" aria-label="Adverb" placeholder=""><input id="verb" aria-label="Verb" placeholder=""></span> ${it.after}</div><button class="btn" id="check" onclick="markTyping()">Check answer</button>`}
+}
+function feedback(ok,ex){let f=document.getElementById('feedback');f.className='feedback show '+(ok?'good':'bad');f.innerHTML=`<strong>${ok?'Chính xác!':'Chưa chính xác — không được làm lại.'}</strong>${ex}`;document.getElementById('next').disabled=false;document.getElementById('score').textContent=`Score: ${points} / ${exercises[which].items.length}`}
+function markChoice(i){if(locked)return;locked=true;const it=exercises[which].items[idx],ok=i===it.a;if(ok)points++;const buttons=[...document.querySelectorAll('#answerArea .opt')];buttons.forEach((b,j)=>{b.disabled=true;if(j===it.a)b.classList.add('correct');if(j===i&&!ok)b.classList.add('wrong')});feedback(ok,it.ex)}
+function markTyping(){if(locked)return;const a=document.getElementById('adv'),v=document.getElementById('verb');if(!a.value.trim()||!v.value.trim()){a.focus();return}locked=true;const it=exercises[which].items[idx],ok=a.value.trim().toLowerCase()===it.adverb.toLowerCase()&&v.value.trim().toLowerCase()===it.verb.toLowerCase();if(ok)points++;a.disabled=true;v.disabled=true;document.getElementById('check').disabled=true;feedback(ok,it.ex)}
+function next(){if(!locked)return;idx++;render()}
+function home(){document.getElementById('quiz').classList.add('hidden');document.getElementById('finish').classList.add('hidden');document.getElementById('intro').classList.remove('hidden')}
+</script></body></html>
